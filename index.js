@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.json());
 
 // Conexão com MongoDB (use sua própria URL do Mongo Atlas ou local)
-mongoose.connect("mongodb://root:example@localhost:27017/api_node?authSource=admin", {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
