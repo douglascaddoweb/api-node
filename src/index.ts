@@ -14,7 +14,6 @@ app.use(express.json());
 app.use("/api", routes);
 
 // Conexão com MongoDB (use sua própria URL do Mongo Atlas ou local)
-console.log("🔗 Conectando ao MongoDB...", process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI as string)
 .then(() => {
   console.log("✅ Conectado ao MongoDB")
