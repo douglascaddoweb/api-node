@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: api-node
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - minha-rede
+
+  mongo:
+    image: mongo:7
+    container_name: mongo-db
+    ports:
+      - "27017:27017"   # 🔹 expõe a porta para o host (Windows)
+    environment:
+      MONGO_INITDB_DATABASE: api_node
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: qazwsx01
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - minha-rede
+
+volumes:
+  mongo-data:
+
+networks:
+  minha-rede:
+    driver: bridge
